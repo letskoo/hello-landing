@@ -6,6 +6,7 @@ export default function StickyHeader() {
   return (
     <header className="pg-header">
       <div
+        className="header-wrapper"
         style={{
           maxWidth: 1200,
           margin: "0 auto",
@@ -16,7 +17,7 @@ export default function StickyHeader() {
         }}
       >
         {/* 로고 */}
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div className="header-logo" style={{ display: "flex", alignItems: "center" }}>
           <Image
             src="/images/logo.png"
             alt="PhotoGroove"
@@ -36,7 +37,7 @@ export default function StickyHeader() {
         </nav>
 
         {/* 버튼 */}
-        <div style={{ display: "flex", gap: 10 }}>
+        <div className="header-actions" style={{ display: "flex", gap: 10 }}>
           <a
             href="#lead-form"
             style={{

@@ -18,7 +18,7 @@ export default function PhotoSlideSection() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: 80,
+        gap: 0,
       }}
     >
       {images.map((src, index) => {

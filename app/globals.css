@@ -22,6 +22,18 @@ body {
   padding-bottom: 140px;
 }
 
+@media (min-width: 769px) {
+  .pg-main {
+    padding-bottom: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pg-main {
+    padding-top: 56px;
+  }
+}
+
 /* 헤더 */
 .pg-header {
   position: sticky;
@@ -29,6 +41,86 @@ body {
   z-index: 2000;
   background: #fff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* 모바일 전용: 가로 스크롤 차단 + 헤더 fixed */
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  .pg-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+  
+  .header-wrapper {
+    padding: 12px 0 !important;
+    justify-content: center !important;
+  }
+  
+  .header-logo,
+  .header-actions {
+    display: none !important;
+  }
+  
+  .category-tabs-container {
+    scrollbar-width: none;
+    overflow-x: hidden;
+  }
+  
+  .category-tabs-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* 모바일 탭: 가운데 정렬, overflow 차단 */
+  .tabs-container-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .tabs-wrap {
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+  }
+  
+  /* 모바일 하단 CTA: pill 형태 유지, 가운데 정렬 */
+  .mobile-cta-bar {
+    display: flex !important;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom)) !important;
+    overflow-x: hidden;
+    width: 100%;
+    height: auto;
+  }
+  
+  .cta-buttons-wrapper {
+    width: 100%;
+    display: flex !important;
+    gap: 10px;
+  }
+  
+  .mobile-cta-bar .mobile-cta-btn {
+    height: 44px;
+    padding: 0 18px;
+    flex: 1;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 /* 앵커 위치 보정 */
@@ -97,9 +189,33 @@ body {
   font-size: 18px;
 }
 
-/* PC에서는 하단 바 숨김 */
+/* 데스크톱에서 fixed bottom 전폭 */
 @media (min-width: 769px) {
-  .mobile-cta-bar {
-    display: none !important;
+  .desktop-cta-bar {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    background: #fff !important;
+    padding: 12px 16px !important;
+    z-index: 5000 !important;
+    box-shadow: 0 -6px 20px rgba(0,0,0,0.08);
+    max-width: none;
+    transform: none;
+  }
+  
+  .cta-buttons-wrapper {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .desktop-cta-bar .mobile-cta-btn {
+    flex: 1;
+    height: 56px;
+    font-size: 14px;
   }
 }

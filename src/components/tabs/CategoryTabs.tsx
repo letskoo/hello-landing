@@ -8,40 +8,40 @@ export default function CategoryTabs() {
   const [active, setActive] = useState("홈");
 
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: 18,
-        height: 40,                 // ✅ StickyHeader의 TABS_HEIGHT와 동일
-        alignItems: "flex-end",
-      }}
-    >
-      {tabs.map((tab) => (
-        <button
-          key={tab}
-          onClick={() => setActive(tab)}
-          style={{
-            height: 40,
-            padding: "0 6px",
-            background: "transparent",
-            border: "none",          // ✅ 테두리 삭제
-            outline: "none",
-            cursor: "pointer",
-            fontSize: 14,
-            whiteSpace: "nowrap",
-            color: "#000",
-            fontWeight: active === tab ? 800 : 500,
-          }}
-        >
-          {tab}
-        </button>
-      ))}
-
-      {/*
-      <div style={{ marginTop: "20px" }}>
-        <strong>{active}</strong> 선택됨
+    <div className="tabs-container-wrapper">
+      <div
+        className="category-tabs-container tabs-wrap"
+        style={{
+          display: "flex",
+          gap: 18,
+          height: 40,
+          alignItems: "flex-end",
+          whiteSpace: "nowrap",
+          overflowX: "auto",
+        }}
+      >
+        {tabs.map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActive(tab)}
+            style={{
+              height: 40,
+              padding: "0 6px",
+              background: "transparent",
+              border: "none",
+              outline: "none",
+              cursor: "pointer",
+              fontSize: 14,
+              whiteSpace: "nowrap",
+              color: "#000",
+              fontWeight: active === tab ? 800 : 500,
+              flexShrink: 0,
+            }}
+          >
+            {tab}
+          </button>
+        ))}
       </div>
-      */}
     </div>
   );
 }
