@@ -1,0 +1,179 @@
+.section {
+  width: 100%;
+  padding: 20px 16px;
+}
+
+.grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* 반응형 */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 520px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  min-height: 260px;
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* 단색 테마 */
+.yellow { background-color: #f2cf57; }
+.lime   { background-color: #b8f34a; }
+.blue   { background-color: #74b7ff; }
+.pink   { background-color: #ff7db7; }
+
+/* 사진 카드일 때 */
+.hasImage {
+  background-image: var(--tile-bg-image) !important;
+}
+
+.hasImage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);   /* ⭐ 마지막 숫자가 어두운 정도. 0은 효과없음. 소수점으로 올릴 수록 불투명도 조절 */
+  z-index: 0;
+}
+
+/* 카드 전체 클릭 레이어 */
+.cardLink {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 18px;
+}
+
+/* 패턴 & 콘텐츠 레이어 */
+.pattern,
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+/* 우상단 패턴 */
+.pattern {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 140px;
+  height: 140px;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.scribble {
+  position: absolute;
+  inset: 0;
+  border: 10px solid rgba(0,0,0,0.65);
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  transform: rotate(12deg);
+  animation: swirl 3.2s ease-in-out infinite;
+}
+
+.spark1, .spark2 {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: rgba(0,0,0,0.65);
+  transform: rotate(20deg);
+  border-radius: 2px;
+  animation: pop 1.6s ease-in-out infinite;
+}
+
+.spark1 {
+  left: 18px;
+  top: 66px;
+  clip-path: polygon(50% 0%, 62% 36%, 100% 50%, 62% 64%, 50% 100%, 38% 64%, 0% 50%, 38% 36%);
+}
+
+.spark2 {
+  right: 18px;
+  bottom: 22px;
+  animation-delay: 0.25s;
+  clip-path: polygon(50% 0%, 62% 36%, 100% 50%, 62% 64%, 50% 100%, 38% 64%, 0% 50%, 38% 36%);
+}
+
+@keyframes swirl {
+  0%   { transform: rotate(10deg) scale(1); }
+  50%  { transform: rotate(22deg) scale(1.04); }
+  100% { transform: rotate(10deg) scale(1); }
+}
+
+@keyframes pop {
+  0%   { transform: rotate(20deg) translateY(0) scale(1); opacity: 0.85; }
+  50%  { transform: rotate(20deg) translateY(-4px) scale(1.06); opacity: 1; }
+  100% { transform: rotate(20deg) translateY(0) scale(1); opacity: 0.85; }
+}
+
+/* 좌하단 콘텐츠 */
+.content {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  right: 16px;
+  color: rgba(0,0,0,0.85);
+}
+
+.title {
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+.subtitle {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+.btnRow {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  pointer-events: auto;
+  z-index: 3;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 42px;
+  padding: 0 16px;
+  border-radius: 999px;
+
+  background: rgba(0,0,0,0.78);
+  color: rgba(255,255,255,0.95);
+
+  font-size: 13px;
+  font-weight: 800;
+
+  box-shadow: 0 10px 20px rgba(0,0,0,0.28);
+  text-decoration: none;
+}
