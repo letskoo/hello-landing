@@ -7,6 +7,31 @@ const tabs = ["홈", "예비부부", "결혼식장", "제휴"];
 export default function CategoryTabs() {
   const [active, setActive] = useState("홈");
 
+  const handleTabClick = (tab: string) => {
+    if (tab === "홈") {
+      setActive(tab);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (tab === "예비부부") {
+      setActive(tab);
+      setTimeout(() => {
+        const element = document.getElementById("photo-slide");
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 100);
+    } else if (tab === "결혼식장") {
+      setActive(tab);
+      setTimeout(() => {
+        const element = document.getElementById("promo-tiles");
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 100);
+    } else if (tab === "제휴") {
+      window.open("https://www.photogroove.co.kr", "_blank");
+    }
+  };
+
   return (
     <div className="tabs-container-wrapper">
       <div
@@ -23,7 +48,7 @@ export default function CategoryTabs() {
         {tabs.map((tab) => (
           <button
             key={tab}
-            onClick={() => setActive(tab)}
+            onClick={() => handleTabClick(tab)}
             style={{
               height: 40,
               padding: "0 6px",

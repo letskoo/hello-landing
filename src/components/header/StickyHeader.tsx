@@ -3,6 +3,30 @@
 import Image from "next/image";
 
 export default function StickyHeader() {
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleNavClick = (section: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    
+    if (section === "home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (section === "prebride") {
+      const element = document.getElementById("photo-slide");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    } else if (section === "venue") {
+      const element = document.getElementById("promo-tiles");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    } else if (section === "partnership") {
+      window.open("https://www.photogroove.co.kr", "_blank");
+    }
+  };
+
   return (
     <header className="pg-header">
       <div
@@ -17,7 +41,11 @@ export default function StickyHeader() {
         }}
       >
         {/* 로고 */}
-        <div className="header-logo" style={{ display: "flex", alignItems: "center" }}>
+        <div
+          className="header-logo"
+          onClick={handleScrollToTop}
+          style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+        >
           <Image
             src="/images/logo.png"
             alt="PhotoGroove"
@@ -30,10 +58,18 @@ export default function StickyHeader() {
 
         {/* 메뉴 */}
         <nav style={{ display: "flex", gap: 24, fontWeight: 700 }}>
-          <a href="#">홈</a>
-          <a href="#">예비부부</a>
-          <a href="#">결혼식장</a>
-          <a href="#">제휴</a>
+          <a href="#" onClick={(e) => handleNavClick("home", e)} style={{ cursor: "pointer" }}>
+            홈
+          </a>
+          <a href="#" onClick={(e) => handleNavClick("prebride", e)} style={{ cursor: "pointer" }}>
+            예비부부
+          </a>
+          <a href="#" onClick={(e) => handleNavClick("venue", e)} style={{ cursor: "pointer" }}>
+            결혼식장
+          </a>
+          <a href="#" onClick={(e) => handleNavClick("partnership", e)} style={{ cursor: "pointer" }}>
+            제휴
+          </a>
         </nav>
 
         {/* 버튼 */}
@@ -50,7 +86,7 @@ export default function StickyHeader() {
             상담하기
           </a>
           <a
-            href="tel:01000000000"
+            href="tel:01065461864"
             style={{
               padding: "8px 16px",
               borderRadius: 10,

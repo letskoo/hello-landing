@@ -1,8 +1,8 @@
 "use client";
 
 export default function MobileCtaBar() {
-  const phone = "01000000000";
-  const kakao = "#";
+  const phone = "01065461864";
+  const kakao = "http://pf.kakao.com/_zRMZj/chat";
 
   return (
     <div className="mobile-cta-bar desktop-cta-bar">

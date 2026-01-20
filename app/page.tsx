@@ -13,8 +13,12 @@ export default function Page() {
       <StickyHeader />
 
       <main className="pg-main">
-        <PromoTiles />
-        <PhotoSlideSection />
+        <div id="promo-tiles">
+          <PromoTiles />
+        </div>
+        <div id="photo-slide">
+          <PhotoSlideSection />
+        </div>
 
         {/* 앵커 타겟 */}
         <div id="lead-form">
