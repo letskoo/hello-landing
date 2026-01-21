@@ -2,37 +2,45 @@
 
 import { useRef, useEffect, useState } from "react";
 
-export default function HeroIntro() {
-  const formInputRef = useRef<HTMLInputElement>(null);
+export default function MidCtaSection() {
   const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 600);
-    return () => clearTimeout(timer);
-  }, []);
+    if (!sectionRef.current) return;
 
-  const handleScrollToForm = () => {
-    const formElement = document.getElementById("lead-form");
-    if (formElement) {
-      formElement.scrollIntoView({ behavior: "smooth" });
-      
-      // 폼의 첫 입력 필드에 포커스
-      setTimeout(() => {
-        const firstInput = formElement.querySelector("input");
-        if (firstInput) {
-          firstInput.focus();
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true);
+          observer.unobserve(sectionRef.current!);
         }
-      }, 500);
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(sectionRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [isVisible]);
+
+  const handleScrollToPortfolio = () => {
+    const portfolioElement = document.getElementById("promo-tiles");
+    if (portfolioElement) {
+      portfolioElement.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
     <section
-      className="hero-intro-section"
+      ref={sectionRef}
+      className="mid-cta-section"
       style={{ width: "100%", overflow: "hidden", paddingTop: "28px" }}
     >
       <div
-        className="hero-intro-container"
+        className="mid-cta-container"
         style={{
           maxWidth: 1200,
           margin: "0 auto",
@@ -48,12 +56,12 @@ export default function HeroIntro() {
       >
         {/* 애니메이션 텍스트 */}
         <div
-          className="hero-intro-content mt-12 md:mt-40"
+          className="mid-cta-content mt-12 md:mt-40"
           style={{ width: "100%", maxWidth: "740px" }}
         >
           {/* 큰 헤드라인 */}
-          <h1
-            className="hero-intro-headline"
+          <h2
+            className="mid-cta-headline"
             style={{
               fontSize: "clamp(18px, 3vw, 36px)",
               fontWeight: 800,
@@ -71,14 +79,14 @@ export default function HeroIntro() {
               letterSpacing: "-0.02em",
             }}
           >
-            단 14일 만에
+            제작비용은 낮추고,
             <br />
-            고퀄리티 홈페이지를 제작해드립니다
-          </h1>
+            홈페이지 퀄리티는 높여드렸습니다
+          </h2>
 
           {/* 서브문구 */}
           <p
-            className="hero-intro-subtitle"
+            className="mid-cta-subtitle"
             style={{
               fontSize: "clamp(11.5px, 1.5vw, 14px)",
               fontWeight: 500,
@@ -86,25 +94,23 @@ export default function HeroIntro() {
               color: "#666",
               margin: 0,
               marginBottom: "50px",
-                animationName: "slideDownFadeIn",
-                animationDuration: "0.8s",
-                animationTimingFunction: "ease-out",
-                animationDelay: "0.9s",
-                animationFillMode: "forwards",
-                animationPlayState: isVisible ? "running" : "paused",
-                opacity: 0,
-              }}
-            >
-            최신 AI 인공지능 기술과 노코드 툴을 활용하는
-            <br />
-            신개념 제작 서비스: <strong style={{ color: "#000", fontWeight: 700 }}>퀵빌딩</strong>
+              animationName: "slideDownFadeIn",
+              animationDuration: "0.8s",
+              animationTimingFunction: "ease-out",
+              animationDelay: "0.9s",
+              animationFillMode: "forwards",
+              animationPlayState: isVisible ? "running" : "paused",
+              opacity: 0,
+            }}
+          >
+            최신 AI 인공지능을 통해 완성된 제작 사례를 공개합니다
           </p>
 
           {/* CTA 버튼 */}
-          <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+          <div style={{ width: "100%", display: "flex", justifyContent: "center", marginBottom: "20px" }}>
             <button
-              onClick={handleScrollToForm}
-              className="hero-intro-cta-button mb-8 md:mb-12"
+              onClick={handleScrollToPortfolio}
+              className="mid-cta-button mb-8 md:mb-12"
               style={{
                 padding: "10px 80px",
                 fontSize: "14px",
@@ -140,7 +146,7 @@ export default function HeroIntro() {
                 e.currentTarget.style.transform = "translateY(0)";
               }}
             >
-              지금 바로 문의하기
+              포트폴리오 보러가기
             </button>
           </div>
         </div>
