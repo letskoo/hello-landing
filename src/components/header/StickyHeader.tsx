@@ -1,104 +1,112 @@
 "use client";
 
+import { useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
+import SlideMenu from "./SlideMenu";
+
+interface MenuItem {
+  label: string;
+  id?: string;
+  onClick?: () => void;
+}
 
 export default function StickyHeader() {
-  const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
 
-  const handleNavClick = (section: string, e: React.MouseEvent) => {
-    e.preventDefault();
-    
-    if (section === "home") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else if (section === "prebride") {
-      const element = document.getElementById("photo-slide");
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    } else if (section === "venue") {
-      const element = document.getElementById("promo-tiles");
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    } else if (section === "partnership") {
-      window.open("https://www.photogroove.co.kr", "_blank");
-    }
-  };
+  const handleLogoClick = useCallback(() => {
+    router.refresh();
+  }, [router]);
+
+  const menuItems: MenuItem[] = [
+    {
+      label: "홈",
+      onClick: () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      },
+    },
+    {
+      label: "예비부부",
+      id: "photo-slide",
+    },
+    {
+      label: "결혼식장",
+      id: "promo-tiles",
+    },
+    {
+      label: "제휴",
+      onClick: () => {
+        window.open("https://www.photogroove.co.kr", "_blank");
+      },
+    },
+  ];
 
   return (
-    <header className="pg-header">
-      <div
-        className="header-wrapper"
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "12px 20px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        {/* 로고 */}
+    <>
+      <header className="pg-header">
         <div
-          className="header-logo"
-          onClick={handleScrollToTop}
-          style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+          className="header-wrapper"
+          style={{
+            maxWidth: 1200,
+            margin: "0 auto",
+            padding: "12px 20px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            position: "relative",
+          }}
         >
-          <Image
-            src="/images/logo.png"
-            alt="PhotoGroove"
-            width={160}
-            height={40}
-            priority
-            style={{ objectFit: "contain" }}
-          />
-        </div>
-
-        {/* 메뉴 */}
-        <nav style={{ display: "flex", gap: 24, fontWeight: 700 }}>
-          <a href="#" onClick={(e) => handleNavClick("home", e)} style={{ cursor: "pointer" }}>
-            홈
-          </a>
-          <a href="#" onClick={(e) => handleNavClick("prebride", e)} style={{ cursor: "pointer" }}>
-            예비부부
-          </a>
-          <a href="#" onClick={(e) => handleNavClick("venue", e)} style={{ cursor: "pointer" }}>
-            결혼식장
-          </a>
-          <a href="#" onClick={(e) => handleNavClick("partnership", e)} style={{ cursor: "pointer" }}>
-            제휴
-          </a>
-        </nav>
-
-        {/* 버튼 */}
-        <div className="header-actions" style={{ display: "flex", gap: 10 }}>
-          <a
-            href="#lead-form"
+          {/* 햄버거 메뉴 버튼 (왼쪽) - 모든 화면에 표시 */}
+          <button
+            className="header-menu-button"
+            onClick={() => setIsMenuOpen(true)}
             style={{
-              padding: "8px 16px",
-              borderRadius: 10,
-              border: "1px solid #ccc",
+              background: "none",
+              border: "none",
+              fontSize: "24px",
               fontWeight: 700,
+              cursor: "pointer",
+              color: "#333",
+              padding: "4px 8px",
+              position: "absolute",
+              left: "16px",
+            }}
+            aria-label="메뉴 열기"
+          >
+            ☰
+          </button>
+
+          {/* 로고 (항상 가운데 정렬) */}
+          <div
+            className="header-logo"
+            onClick={handleLogoClick}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              cursor: "pointer",
+              flex: 1,
+              justifyContent: "center",
             }}
           >
-            상담하기
-          </a>
-          <a
-            href="tel:01065461864"
-            style={{
-              padding: "8px 16px",
-              borderRadius: 10,
-              background: "#000",
-              color: "#fff",
-              fontWeight: 700,
-            }}
-          >
-            전화
-          </a>
+            <Image
+              src="/images/logo.png"
+              alt="PhotoGroove"
+              width={160}
+              height={40}
+              priority
+              style={{ objectFit: "contain" }}
+            />
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {/* 슬라이드 메뉴 - 모든 화면에서 동작 */}
+      <SlideMenu
+        isOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
+        items={menuItems}
+      />
+    </>
   );
 }

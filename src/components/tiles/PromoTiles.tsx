@@ -4,15 +4,9 @@ import type { CSSProperties } from "react";
 import styles from "./PromoTiles.module.css";
 
 type Tile = {
-  title: string;
-  subtitle: string;
-
-  // 카드 전체 링크
-  href: string;
-
-  // 버튼 전용
-  buttonLabel: string;
-  buttonHref: string;
+  label: string;  // 라벨 (나은 제목 등)
+  title: string;  // 크게 나타나는 본문 텍스트
+  link?: string;  // 클릭 링크
 
   // 단색 테마 (선택)
   theme?: "yellow" | "lime" | "blue" | "pink";
@@ -23,36 +17,28 @@ type Tile = {
 
 const TILES: Tile[] = [
   {
-    title: "Whisk",
-    subtitle: "지금 바로 사용해 보세요",
-    href: "http://pf.kakao.com/_zRMZj/chat",
-    buttonLabel: "WHISK 실행 ↗",
-    buttonHref: "https://www.photogroove.co.kr",
+    label: "브랜드 샷",
+    title: "WHISK",
+    link: "http://pf.kakao.com/_zRMZj/chat",
     theme: "yellow",
   },
   {
+    label: "아이디어 도구",
     title: "Spark",
-    subtitle: "새로운 아이디어를 켜세요",
-    href: "http://pf.kakao.com/_zRMZj/chat",
-    buttonLabel: "아이디어 열기 ↗",
-    buttonHref: "https://www.photogroove.co.kr",
+    link: "http://pf.kakao.com/_zRMZj/chat",
     theme: "lime",
   },
   {
+    label: "영상 전환",
     title: "Flow",
-    subtitle: "장면을 자연스럽게 이어요",
-    href: "http://pf.kakao.com/_zRMZj/chat",
-    buttonLabel: "문의하기 ↗",
-    buttonHref: "https://www.photogroove.co.kr",
+    link: "http://pf.kakao.com/_zRMZj/chat",
     theme: "blue",
   },
   {
+    label: "에디팅 스튜디오",
     title: "Studio",
-    subtitle: "콘텐츠를 빠르게 완성",
-    href: "http://pf.kakao.com/_zRMZj/chat",
-    buttonLabel: "전화문의 ↗",
-    buttonHref: "https://www.photogroove.co.kr",
-    imageUrl: "/images/studio.jpg", // ⭐ 사진 카드
+    link: "http://pf.kakao.com/_zRMZj/chat",
+    imageUrl: "/images/studio.jpg",
   },
 ];
 
@@ -70,59 +56,54 @@ function themeClass(theme?: Tile["theme"]) {
   }
 }
 
-export default function PromoTiles() {
+function PromoTiles() {
   return (
     <section id="promo-tiles" className={styles.section}>
-      <div className={styles.grid}>
-        {TILES.map((t) => {
-          const styleVars: CSSProperties = {};
+      <div className={styles.container}>
+        {/* 타일 위 텍스트 */}
+        <div className={styles.sectionText}>
+          단 14일, 빠르게 만들면 퀄리티가<br />
+          떨어진다는 편견 깨버리겠습니다
+        </div>
 
-          // 사진 카드일 경우 CSS 변수로 강제 주입
-          if (t.imageUrl) {
-            (styleVars as any)["--tile-bg-image"] = `url(${t.imageUrl})`;
-          }
+        {/* 타일 그리드 */}
+        <div className={styles.grid}>
+          {TILES.map((tile) => {
+            const styleVars: CSSProperties = {};
 
-          return (
-            <div
-              key={t.title}
-              className={`${styles.card} ${themeClass(t.theme)} ${
-                t.imageUrl ? styles.hasImage : ""
-              }`}
-              style={t.imageUrl ? styleVars : undefined}
-            >
-              {/* 카드 전체 클릭 레이어 */}
+            if (tile.imageUrl) {
+              (styleVars as any)["--tile-bg-image"] = `url(${tile.imageUrl})`;
+            }
+
+            return (
               <a
-                href={t.href}
-                className={styles.cardLink}
-                aria-label={`${t.title} 이동`}
-              />
+                key={tile.title}
+                href={tile.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${styles.card} ${themeClass(tile.theme)} ${
+                  tile.imageUrl ? styles.hasImage : ""
+                }`}
+                style={tile.imageUrl ? styleVars : undefined}
+              >
+                {/* 배경 이미지 타일에만 오버레이 적용 */}
+                {tile.imageUrl && <div className={styles.overlay}></div>}
 
-              {/* 우상단 패턴 */}
-              <div className={styles.pattern} aria-hidden="true">
-                <span className={styles.scribble} />
-                <span className={styles.spark1} />
-                <span className={styles.spark2} />
-              </div>
-
-              {/* 좌하단 콘텐츠 */}
-              <div className={styles.content}>
-                <div className={styles.title}>{t.title}</div>
-                <div className={styles.subtitle}>{t.subtitle}</div>
-
-                <div className={styles.btnRow}>
-                  <a
-                    href={t.buttonHref}
-                    className={styles.btn}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {t.buttonLabel}
-                  </a>
+                {/* 타일 내용 (상단 배치) */}
+                <div className={styles.content}>
+                  <div className={styles.labelWithArrow}>
+                    <span className={styles.label}>{tile.label}</span>
+                    <span className={styles.arrow}></span>
+                  </div>
+                  <div className={styles.title}>{tile.title}</div>
                 </div>
-              </div>
-            </div>
-          );
-        })}
+              </a>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
 }
+
+export default PromoTiles;
