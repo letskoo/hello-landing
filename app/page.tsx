@@ -7,7 +7,8 @@ import ConversionForm from "@/src/components/forms/ConversionForm";
 import MobileCtaBar from "@/src/components/cta/MobileCtaBar";
 import FloatingActionButton from "@/src/components/cta/FloatingActionButton";
 import PromoTiles from "@/src/components/tiles/PromoTiles";
-import PhotoSlideSection from "@/src/components/sections/PhotoSlideSection";
+import BrandMarquee from "@/src/components/sections/BrandMarquee";
+import ReviewsCarousel from "@/src/components/sections/ReviewsCarousel";
 
 export default function Page() {
   return (
@@ -24,8 +25,13 @@ export default function Page() {
         <div id="promo-tiles">
           <PromoTiles />
         </div>
-        <div id="photo-slide">
-          <PhotoSlideSection />
+        
+        <div id="brand-marquee">
+          <BrandMarquee />
+        </div>
+
+        <div id="reviews-carousel">
+          <ReviewsCarousel />
         </div>
 
         {/* 앵커 타겟 */}

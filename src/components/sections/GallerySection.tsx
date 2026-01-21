@@ -20,8 +20,8 @@ export default function GallerySection() {
   ];
 
   // 무한 루프를 위한 이미지 배열 3번 복제 (1장인 경우 제외)
-  const infiniteImages = images.length > 1 
-    ? [...images, ...images, ...images] 
+  const infiniteImages = images.length > 1
+    ? [...images, ...images, ...images]
     : images;
 
   // 반응형 카드 폭 설정 (다음 카드가 1/4~1/3 보이도록)
@@ -137,7 +137,7 @@ export default function GallerySection() {
     };
 
     container.addEventListener('scroll', handleScrollEnd);
-    
+
     return () => {
       container.removeEventListener('scroll', handleScrollEnd);
       clearTimeout(scrollTimer);
@@ -152,7 +152,7 @@ export default function GallerySection() {
     const timer = setTimeout(() => {
       const startPos = container.scrollLeft;
       container.scrollTo({ left: startPos + 50, behavior: "smooth" });
-      
+
       setTimeout(() => {
         container.scrollTo({ left: startPos, behavior: "smooth" });
       }, 400);
@@ -223,7 +223,7 @@ export default function GallerySection() {
               // 어느 세트에 속하는지 계산 (0: 첫번째, 1: 중간, 2: 마지막)
               const setIndex = Math.floor(index / images.length);
               const originalIndex = index % images.length;
-              
+
               return (
                 <div
                   key={`${setIndex}-${originalIndex}`}
@@ -475,48 +475,37 @@ export default function GallerySection() {
         }
 
         @media (max-width: 768px) {
-          .gallery-scroll-container {
-            gap: 4px !important;
-          }
-          
-          .gallery-scroll-container > div {
-            min-width: 39vw !important;
-            max-width: none !important;
-          }
-        }
+  .gallery-scroll-container {
+    gap: 4px !important;
+  }
+  .gallery-scroll-container > div {
+    min-width: 39vw !important;
+    max-width: none !important;
+  }
+}
 
-        @media (min-width: 1024px) and (max-width: 1399px) {
-          .gallery-scroll-container {
-            gap: 10px !important;
-          }
-          
-          .gallery-scroll-container > div {
-            min-width: calc((100vw - 50px) / 5.25) !important; /* 5장 + 0.25장 피크 */
-            max-width: 210px !important;
-          }
-        }
+/* 태블릿: 3.5장 */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .gallery-scroll-container {
+    gap: 10px !important;
+  }
+  .gallery-scroll-container > div {
+    min-width: calc((min(100vw, 1200px) - 50px) / 3.5) !important;
+    max-width: 260px !important;
+  }
+}
 
-        @media (min-width: 1400px) {
-          .gallery-scroll-container {
-            gap: 10px !important;
-          }
-          
-          .gallery-scroll-container > div {
-            min-width: calc((100vw - 50px) / 5.25) !important; /* 5장 + 0.25장 피크 */
-            max-width: 230px !important;
-          }
-        }
+/* 데스크톱: 5장 + 조각(5.25장) */
+@media (min-width: 1024px) {
+  .gallery-scroll-container {
+    gap: 10px !important;
+  }
+  .gallery-scroll-container > div {
+    min-width: calc((min(100vw, 1200px) - 50px) / 5.25) !important;
+    max-width: 230px !important;
+  }
+}
 
-        @media (min-width: 1400px) {
-          .gallery-scroll-container {
-            gap: 6px !important;
-          }
-          
-          .gallery-scroll-container > div {
-            min-width: 17vw !important; /* 더 넓은 화면에서 5장 + 힌트 */
-            max-width: 230px !important;
-          }
-        }
       `}</style>
     </section>
   );
