@@ -96,6 +96,7 @@ export default function StickyHeader() {
               height={40}
               priority
               style={{ objectFit: "contain" }}
+              className="header-logo-image"
             />
           </div>
         </div>
@@ -107,6 +108,28 @@ export default function StickyHeader() {
         onClose={() => setIsMenuOpen(false)}
         items={menuItems}
       />
+
+      {/* 데스크톱 헤더 크기 증가 스타일 */}
+      <style>{`
+        @media (min-width: 768px) {
+          .pg-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+          }
+
+          .pg-header .header-wrapper {
+            padding: 20px 20px;
+          }
+
+          .header-logo-image {
+            width: 200px !important;
+            height: 50px !important;
+          }
+        }
+      `}</style>
     </>
   );
 }

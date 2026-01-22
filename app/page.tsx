@@ -10,8 +10,10 @@ import PromoTiles from "@/src/components/tiles/PromoTiles";
 import MidCtaSection from "@/src/components/sections/MidCtaSection";
 import SquareGallerySection from "@/src/components/sections/SquareGallerySection";
 import PricingSection from "@/src/components/sections/PricingSection";
+import BlackCtaSection from "@/src/components/sections/BlackCtaSection";
 import BrandMarquee from "@/src/components/sections/BrandMarquee";
 import ReviewsCarousel from "@/src/components/sections/ReviewsCarousel";
+import FooterSection from "@/src/components/footer/FooterSection";
 
 export default function Page() {
   return (
@@ -35,9 +37,6 @@ export default function Page() {
         {/* 정사각형 포트폴리오 갤러리 */}
         <SquareGallerySection />
         
-        {/* 가격표 섹션 */}
-        <PricingSection />
-        
         <div id="brand-marquee">
           <BrandMarquee />
         </div>
@@ -46,11 +45,19 @@ export default function Page() {
           <ReviewsCarousel />
         </div>
 
+        {/* 가격표 섹션 */}
+        <PricingSection />
+
+        {/* 블랙 CTA 섹션 */}
+        <BlackCtaSection />
+
         {/* 앵커 타겟 */}
         <div id="lead-form">
           <ConversionForm />
         </div>
       </main>
+
+      <FooterSection />
 
       <MobileCtaBar />
       <FloatingActionButton />

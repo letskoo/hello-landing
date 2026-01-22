@@ -12,6 +12,7 @@ export default function ConversionForm() {
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [isMarketingAgreed, setIsMarketingAgreed] = useState(false);
 
   const isFormValid = formData.name.trim() !== "" && formData.phone.trim() !== "";
 
@@ -64,10 +65,10 @@ export default function ConversionForm() {
       id="lead-form"
       style={{
         width: "100%",
-        padding: "80px 16px",          // 모바일 좌우 여백 복구
+        padding: "80px 20px",
         boxSizing: "border-box",
         display: "flex",
-        justifyContent: "center",      // 데스크탑 가운데 정렬
+        justifyContent: "center",
       }}
     >
       <div
@@ -132,11 +133,69 @@ export default function ConversionForm() {
               }}
             />
 
+            {/* 마케팅 동의 체크박스 */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                marginTop: "2px",
+                marginBottom: "16px",
+              }}
+            >
+              <input
+                type="checkbox"
+                id="marketing-agreement"
+                checked={isMarketingAgreed}
+                onChange={(e) => setIsMarketingAgreed(e.target.checked)}
+                style={{
+                  width: "18px",
+                  height: "18px",
+                  cursor: "pointer",
+                  accentColor: "#003DA5",
+                }}
+              />
+              <label
+                htmlFor="marketing-agreement"
+                style={{
+                  fontSize: "14px",
+                  color: "#333",
+                  cursor: "pointer",
+                  margin: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "4px",
+                }}
+              >
+                마케팅 활용에 동의합니다
+                <a
+                  href="http://pf.kakao.com/_zRMZj"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    fontSize: "14px",
+                    color: "#003DA5",
+                    textDecoration: "none",
+                    cursor: "pointer",
+                    transition: "opacity 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.opacity = "0.7";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.opacity = "1";
+                  }}
+                >
+                  (내용보기)
+                </a>
+              </label>
+            </div>
+
             <button
               type="submit"
               disabled={!isFormValid || loading}
               style={{
-                marginTop: 10,
+                marginTop: 0,
                 height: 52,
                 borderRadius: 12,
                 border: "none",

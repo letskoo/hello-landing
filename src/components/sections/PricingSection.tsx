@@ -83,6 +83,56 @@ const PRICING_CARDS: PricingCard[] = [
       "자사 서버 이용시 월 3만원 (수정 및 관리)",
     ],
   },
+  {
+    id: 2,
+    title: "비즈니스 홈페이지",
+    price: "60만 원부터 ~",
+    description: "기업, 스타트업, 기관에 적합한 형태",
+    services: [
+      "PC + 모바일 반응형 제작",
+      "메인 1 + 서브 4 페이지 구성",
+      "홈페이지 UI 기획 진행",
+      "1:1 전담 케어 진행",
+    ],
+    duration: {
+      title: "제작 기간",
+      days: "작업 일수: 14일 이내 완성",
+      notice: "*피드백 과정 중 일부 기간이 늘어날 수 있습니다.",
+    },
+    benefits: [
+      "무제한 수정 서비스 제공 (웹디자인 작업 과정 중)",
+      "네이버 & 구글 SEO 작업",
+      "맞춤형 가이드 제공",
+    ],
+    additionalCosts: [
+      "1 페이지 추가 시: 10만 원",
+    ],
+  },
+  {
+    id: 3,
+    title: "프리미엄 홈페이지",
+    price: "100만 원 부터 ~",
+    description: "규모가 큰 기업, 회사에 적합한 형태",
+    services: [
+      "PC + 모바일 반응형 제작",
+      "메인 1 + 서브 9 페이지 구성",
+      "홈페이지 UI 기획 진행",
+      "1:1 전담 케어 진행",
+    ],
+    duration: {
+      title: "제작 기간",
+      days: "작업 일수: 2-3주 이내 완성",
+      notice: "*피드백 과정 중 일부 기간이 늘어날 수 있습니다.",
+    },
+    benefits: [
+      "무제한 수정 서비스 제공 (웹디자인 작업 과정 중)",
+      "네이버 & 구글 SEO 작업",
+      "맞춤형 가이드 제공",
+    ],
+    additionalCosts: [
+      "1페이지 추가 시: 10만 원",
+    ],
+  },
 ];
 
 export default function PricingSection() {
@@ -224,7 +274,7 @@ export default function PricingSection() {
                     fontSize: "22px",
                     fontWeight: 700,
                     color: "#000",
-                    margin: "0 0 4px 0",
+                    margin: "0 0 8px 0",
                     lineHeight: 1.2,
                   }}
                 >
@@ -235,7 +285,7 @@ export default function PricingSection() {
                     fontSize: "28px",
                     fontWeight: 800,
                     color: "#003DA5",
-                    margin: "0 0 10px 0",
+                    margin: "0 0 60px 0",
                     lineHeight: 1.1,
                   }}
                 >
@@ -264,13 +314,13 @@ export default function PricingSection() {
               />
 
               {/* 제작 서비스 구성 */}
-              <div style={{ marginBottom: "20px" }}>
+              <div style={{ marginBottom: "40px" }}>
                 <h4
                   style={{
                     fontSize: "16px",
                     fontWeight: 700,
                     color: "#000",
-                    margin: "0 0 12px 0",
+                    margin: "0 0 8px 0",
                     display: "flex",
                     alignItems: "center",
                   }}
@@ -281,7 +331,7 @@ export default function PricingSection() {
                 <ul
                   style={{
                     margin: 0,
-                    padding: "0 0 0 20px",
+                    padding: "0 0 0 32px",
                     listStyleType: "disc",
                   }}
                 >
@@ -293,7 +343,7 @@ export default function PricingSection() {
                         fontWeight: 400,
                         color: "#333",
                         lineHeight: 1.8,
-                        marginBottom: "4px",
+                        marginBottom: "3px",
                       }}
                     >
                       {service}
@@ -303,13 +353,13 @@ export default function PricingSection() {
               </div>
 
               {/* 제작 기간 */}
-              <div style={{ marginBottom: "20px" }}>
+              <div style={{ marginBottom: "40px" }}>
                 <h4
                   style={{
                     fontSize: "16px",
                     fontWeight: 700,
                     color: "#000",
-                    margin: "0 0 12px 0",
+                    margin: "0 0 8px 0",
                     display: "flex",
                     alignItems: "center",
                   }}
@@ -320,7 +370,7 @@ export default function PricingSection() {
                 <ul
                   style={{
                     margin: 0,
-                    padding: "0 0 0 20px",
+                    padding: "0 0 0 32px",
                     listStyleType: "disc",
                   }}
                 >
@@ -330,7 +380,7 @@ export default function PricingSection() {
                       fontWeight: 400,
                       color: "#333",
                       lineHeight: 1.6,
-                      marginBottom: "8px",
+                      marginBottom: "3px",
                     }}
                   >
                     {card.duration.days}
@@ -342,6 +392,8 @@ export default function PricingSection() {
                     fontWeight: 400,
                     color: "#999",
                     margin: 0,
+                    marginTop: "8px",
+                    paddingLeft: "32px",
                     lineHeight: 1.5,
                   }}
                 >
@@ -350,13 +402,13 @@ export default function PricingSection() {
               </div>
 
               {/* 제작 서비스 혜택 */}
-              <div style={{ marginBottom: "20px" }}>
+              <div style={{ marginBottom: "40px" }}>
                 <h4
                   style={{
                     fontSize: "16px",
                     fontWeight: 700,
                     color: "#000",
-                    margin: "0 0 12px 0",
+                    margin: "0 0 8px 0",
                     display: "flex",
                     alignItems: "center",
                   }}
@@ -367,7 +419,7 @@ export default function PricingSection() {
                 <ul
                   style={{
                     margin: 0,
-                    padding: "0 0 0 20px",
+                    padding: "0 0 0 32px",
                     listStyleType: "disc",
                   }}
                 >
@@ -379,7 +431,7 @@ export default function PricingSection() {
                         fontWeight: 400,
                         color: "#333",
                         lineHeight: 1.8,
-                        marginBottom: "4px",
+                        marginBottom: "3px",
                       }}
                     >
                       {benefit}
@@ -395,7 +447,7 @@ export default function PricingSection() {
                     fontSize: "16px",
                     fontWeight: 700,
                     color: "#000",
-                    margin: "0 0 12px 0",
+                    margin: "0 0 8px 0",
                     display: "flex",
                     alignItems: "center",
                   }}
@@ -406,7 +458,7 @@ export default function PricingSection() {
                 <ul
                   style={{
                     margin: 0,
-                    padding: "0 0 0 20px",
+                    padding: "0 0 0 32px",
                     listStyleType: "disc",
                   }}
                 >
@@ -418,7 +470,7 @@ export default function PricingSection() {
                         fontWeight: 400,
                         color: "#333",
                         lineHeight: 1.8,
-                        marginBottom: "4px",
+                        marginBottom: "3px",
                       }}
                     >
                       {cost}
@@ -455,7 +507,37 @@ export default function PricingSection() {
           }
         }
 
-        /* 반응형 - 모바일 */
+        /* 데스크톱 - 3열 그리드 */
+        @media (min-width: 1024px) {
+          .pricing-cards-grid {
+            display: grid !important;
+            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+            gap: 24px !important;
+          }
+          
+          .pricing-card {
+            max-width: none !important;
+            min-width: 0 !important;
+            width: 100% !important;
+          }
+        }
+
+        /* 태블릿 - 2열 그리드 */
+        @media (min-width: 769px) and (max-width: 1023px) {
+          .pricing-cards-grid {
+            display: grid !important;
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 24px !important;
+          }
+          
+          .pricing-card {
+            max-width: none !important;
+            min-width: 0 !important;
+            width: 100% !important;
+          }
+        }
+
+        /* 모바일 - 1열 */
         @media (max-width: 768px) {
           .pricing-cards-grid {
             flex-direction: column;
